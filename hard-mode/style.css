@@ -4,12 +4,12 @@
   -webkit-box-sizing: border-box;
 }
 
-.main-content {
+#content {
     width: 600px;
     margin: 50px auto;
 }
 
-.main-content div {
+#content div {
     font-size: 2em;
     display: inline-block;
     width: 120px;
@@ -21,6 +21,6 @@
     text-align: right;
 }
 
-#display {
+#content #display {
     width: 360px;
 }

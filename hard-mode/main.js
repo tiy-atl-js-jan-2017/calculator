@@ -3,81 +3,63 @@ var right = "";
 var op = "";
 
 var display = document.getElementById("display");
+var controls = document.getElementById("content");
 
-var clearButton = document.getElementById("clear");
-var sevenButton = document.getElementById("seven");
-var eightButton = document.getElementById("eight");
-var nineButton = document.getElementById("nine");
-var divButton = document.getElementById("div");
-var fourButton = document.getElementById("four");
-var fiveButton = document.getElementById("five");
-var sixButton = document.getElementById("six");
-var mulButton = document.getElementById("mul");
-var oneButton = document.getElementById("one");
-var twoButton = document.getElementById("two");
-var threeButton = document.getElementById("three");
-var subButton = document.getElementById("sub");
-var zeroButton = document.getElementById("zero");
-var dotButton = document.getElementById("dot");
-var equalsButton = document.getElementById("equals");
-var addButton = document.getElementById("add");
+controls.addEventListener('click', processClick);
 
+function processClick (event) {
+  var target = event.target;
+  var buttonType = target.dataset.type;
 
-// clearButton.addEventListener('click', processClear);
-sevenButton.addEventListener('click', processSeven);
-// eightButton.addEventListener('click', processEight);
-// nineButton.addEventListener('click', processNine);
-// divButton.addEventListener('click', processDiv);
-// fourButton.addEventListener('click', processFour);
-// fiveButton.addEventListener('click', processFive);
-// sixButton.addEventListener('click', processSix);
-// mulButton.addEventListener('click', processMul);
-// oneButton.addEventListener('click', processOne);
-// twoButton.addEventListener('click', processTwo);
-// threeButton.addEventListener('click', processThree);
-// subButton.addEventListener('click', processSub);
-// zeroButton.addEventListener('click', processZero);
-// dotButton.addEventListener('click', processDot);
-equalsButton.addEventListener('click', processEquals);
-addButton.addEventListener('click', processAdd);
+  if (buttonType === "op") { processOp(target); }
+  if (buttonType === "num") { processNum(target); }
+  if (buttonType === "clear") { processClear(target); }
+  if (buttonType === "equals") { processEquals(target); }
+
+  updateDisplay();
+}
 
 function updateDisplay () {
   display.innerHTML = left + " " + op + " " + right;
 }
 
-function processEquals (event) {
-  var answer;
-  if (op === "+") {
-    answer = Number(left) + Number(right);
-  } else if (op === "-") {
-    answer = Number(left) - Number(right);
-  } else if (op === "*") {
-    answer = Number(left) * Number(right);
-  } else if (op === "/") {
-    answer = Number(left) / Number(right);
+function processOp (target) {
+  if (op === "") {
+    op = target.innerHTML;
+  } else {
+    doMath();
+    op = target.innerHTML;
   }
-  left = answer;
+}
+
+function processNum (target) {
+  if (op === "") {
+    left += target.innerHTML;
+  } else {
+    right += target.innerHTML;
+  }
+}
+
+function processClear (target) {
+  left = "";
   right = "";
   op = "";
-  updateDisplay();
 }
 
-
-function processAdd (event) {
-  if (op === "") {
-    op = "+";
-  } else {
-    processEquals();
-    op = "+";
-  }
-  updateDisplay();
+function processEquals (target) {
+  doMath();
 }
 
-function processSeven (event) {
-  if (op === "") {
-    left += 7;
-  } else {
-    right += 7;
+function doMath () {
+  if (op === "+") {
+    left = Number(left) + Number(right);
+  } else if (op === "-") {
+    left = Number(left) - Number(right);
+  } else if (op === "X") {
+    left = Number(left) * Number(right);
+  } else if (op === "/") {
+    left = Number(left) / Number(right);
   }
-  updateDisplay();
+  right = "";
+  op = "";
 }
