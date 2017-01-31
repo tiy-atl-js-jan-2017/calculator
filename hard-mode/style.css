@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.main-content {
+    width: 600px;
+    margin: 50px auto;
+}
+
+.main-content div {
+    font-size: 2em;
+    display: inline-block;
+    width: 120px;
+    height: 75px;
+    background: green;
+    color: white;
+    padding: 40px;
+    border: 1px solid lightgrey;
+}
+
+#display {
+    width: 360px;
+}
