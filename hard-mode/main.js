@@ -9,7 +9,10 @@ controls.addEventListener('click', processClick);
 
 function processClick (event) {
   var target = event.target;
+  console.log(event);
+  console.log(target);
   var buttonType = target.dataset.type;
+  console.log(target.dataset);
 
   if (buttonType === "op") { processOp(target); }
   if (buttonType === "num") { processNum(target); }
